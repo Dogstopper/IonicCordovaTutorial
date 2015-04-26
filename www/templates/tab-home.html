@@ -1,0 +1,30 @@
+<ion-view view-title="Contacts" style="background-color: rgba(216, 212, 225, 0.44)">
+    <ion-content>
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="Search" ng-model="search">
+        </label>
+        <circle-spinner ng-show="loading"></circle-spinner>
+        <div class="card" ng-repeat="contact in contacts | filter:search" style="padding: 0" ng-show="!loading">
+            <div class="item item-divider" ng-style="{ 'background-color': getButtonColor($index) }">
+                <h3>{{ contact.name.formatted }}</h3>
+            </div>
+            <div class="item" style="padding:0">
+                <div class="list">
+                    <div class="item" style="background-color: #fbfbfb">
+                        <h2>Phone Numbers:</h2>
+                        <p ng-repeat="number in contact.phoneNumbers">
+                            <b>{{ number.type }}</b>: {{ number.value }}
+                        </p>
+                    </div>
+                    <div class="item" style="background-color: #fbfbfb">
+                        <h2>Emails:</h2>
+                        <p ng-repeat="email in contact.emails">
+                            <b>{{ email.type }}</b>: {{ email.value }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
