@@ -1,4 +1,4 @@
-angular.module('contacts.services', ['ionic', 'ngCordova'])
+angular.module('contacts.services', [])
 
 .factory('$localstorage', ['$window', function ($window) {
     return {
