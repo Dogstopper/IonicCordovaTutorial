@@ -1,9 +1,9 @@
-angular.module('contacts.controllers', ['ngCordova', 'angular-spinkit'])
+angular.module('contacts.controllers', ['ngCordova', 'angular-spinkit', 'contacts.services'])
 
-.controller('ContactsHomeController', ['$scope', '$cordovaContacts', '$ionicPlatform',
-                                          function ($scope, $cordovaContacts, $ionicPlatform) {
+.controller('ContactsHomeController', ['$scope', '$cordovaContacts', '$ionicPlatform', '$localstorage',
+                                          function ($scope, $cordovaContacts, $ionicPlatform, $localstorage) {
         $scope.loading = true;
-        $scope.contacts = [{}];
+        $scope.contacts = $localstorage.getObject('contact_list');
         $ionicPlatform.ready(function () {
 
             var options = new ContactFindOptions();
@@ -15,6 +15,7 @@ angular.module('contacts.controllers', ['ngCordova', 'angular-spinkit'])
                 function (result) {
                     $scope.contacts = $scope.filterNonNull(result);
                     $scope.loading = false;
+                    $localstorage.setObject('contact_list', result);
                 },
                 function (error) {
 
